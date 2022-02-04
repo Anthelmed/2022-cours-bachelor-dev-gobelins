@@ -1,12 +1,11 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class HUD : MonoBehaviour
 {
-    public TextMeshProUGUI textMesh;
+    public TextMeshProUGUI textMesh; // ancien système d'ui
+    public UIDocument uiDocument; // nouveau sytème d'ui
     
     private void OnEnable()
     {
@@ -20,6 +19,9 @@ public class HUD : MonoBehaviour
     
     private void OnClickCountChanged(int value)
     {
-        textMesh.text = $"ClickCount: {value}";
+        //textMesh.text = $"ClickCount: {value}";
+
+        var label = uiDocument.rootVisualElement.Q<Label>();
+        label.text  = $"ClickCount: {value}";
     }
 }
