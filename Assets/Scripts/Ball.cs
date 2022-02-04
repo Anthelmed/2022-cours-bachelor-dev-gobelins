@@ -27,8 +27,14 @@ public class Ball : MonoBehaviour
     {
         var force = math.lerp(minMaxForce.x, minMaxForce.y, _holdDuration / maxHoldDuration);
         
-        rigidbody.AddForce(rigidbody.transform.forward * force);
+        var direction = Camera.main.transform.forward;
+        direction.y = 0; // Applati le vecteur
+        direction.Normalize();
+        
+        rigidbody.AddForce(direction * force, ForceMode.Impulse);
         
         _holdDuration = 0;
+        
+        Scene.IncrementClickCount();
     }
 }
